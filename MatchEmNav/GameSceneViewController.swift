@@ -9,7 +9,7 @@ import UIKit
 
 class GameSceneViewController: UIViewController {
     
-    @IBOutlet weak var label1: UILabel!
+    //@IBOutlet weak var label1: UILabel!
     @IBOutlet weak var scoreTimerLabel: UILabel! // Score and timer Label
     @IBOutlet weak var gameOverLabel: UILabel! // Game Over Label
     @IBOutlet var startButtonOutlet: UIButton! // The Start/retry button
@@ -164,4 +164,7 @@ class GameSceneViewController: UIViewController {
     func randColor() -> UIColor {
         return UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1.0)
     }
+}
+class ConfigSceneViewController: UIViewController {
+    
 }
