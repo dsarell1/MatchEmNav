@@ -13,6 +13,7 @@
 		AC7AF9F22AEEEACD000E6123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC7AF9F02AEEEACD000E6123 /* Main.storyboard */; };
 		AC7AF9F42AEEEACE000E6123 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC7AF9F32AEEEACE000E6123 /* Assets.xcassets */; };
 		AC7AF9F72AEEEACE000E6123 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC7AF9F52AEEEACE000E6123 /* LaunchScreen.storyboard */; };
+		AC7AF9FF2AEF0513000E6123 /* ConfigSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7AF9FE2AEF0513000E6123 /* ConfigSceneViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		AC7AF9F32AEEEACE000E6123 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC7AF9F62AEEEACE000E6123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC7AF9F82AEEEACE000E6123 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC7AF9FE2AEF0513000E6123 /* ConfigSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigSceneViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				AC7AF9EA2AEEEACD000E6123 /* AppDelegate.swift */,
 				AC7AF9EC2AEEEACD000E6123 /* SceneDelegate.swift */,
 				AC7AF9EE2AEEEACD000E6123 /* GameSceneViewController.swift */,
+				AC7AF9FE2AEF0513000E6123 /* ConfigSceneViewController.swift */,
 				AC7AF9F02AEEEACD000E6123 /* Main.storyboard */,
 				AC7AF9F32AEEEACE000E6123 /* Assets.xcassets */,
 				AC7AF9F52AEEEACE000E6123 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC7AF9EF2AEEEACD000E6123 /* GameSceneViewController.swift in Sources */,
+				AC7AF9FF2AEF0513000E6123 /* ConfigSceneViewController.swift in Sources */,
 				AC7AF9EB2AEEEACD000E6123 /* AppDelegate.swift in Sources */,
 				AC7AF9ED2AEEEACD000E6123 /* SceneDelegate.swift in Sources */,
 			);
