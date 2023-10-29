@@ -24,6 +24,9 @@ class GameSceneViewController: UIViewController {
     var newRectTimer: Timer?
     
     var gameRunning = false
+    var gameTime = 12
+    //var rectColors: UIColor
+    var bigRec = false
     
     var buttonTag = 0
     var matchCount = 0 {
@@ -179,9 +182,16 @@ class GameSceneViewController: UIViewController {
     
   // ---------- Random Size, Location and Color Functions
     func randSize() -> CGSize {
-        let width = CGFloat.random(in: 25.0...100.0)
-        let height = CGFloat.random(in: 25.0...100.0)
-        return CGSize(width: width, height: height)
+        if bigRec == false {
+            let width = CGFloat.random(in: 25.0...100.0)
+            let height = CGFloat.random(in: 25.0...100.0)
+            return CGSize(width: width, height: height)
+        }
+        else {
+            let width = CGFloat.random(in: 75.0...160.0)
+            let height = CGFloat.random(in: 75.0...160.0)
+            return CGSize(width: width, height: height)
+        }
     }
     func randLocation(_ rectSize: CGSize) -> CGPoint {
         let x = CGFloat.random(in: 0...(self.view.frame.width - (rectSize.width)))

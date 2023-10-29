@@ -13,6 +13,7 @@ class ConfigSceneViewController: UIViewController {
     
     
     @IBOutlet weak var SpeedSlider: UISlider!
+    @IBOutlet weak var bigRecToggle: UISwitch!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -25,6 +26,7 @@ class ConfigSceneViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         SpeedSlider.value = Float((gameSceneVC?.score)!)
+        bigRecToggle.isOn = (gameSceneVC?.bigRec)!
     }
     
     @IBAction func SpeedSilderAction(_ sender: UISlider) {
@@ -32,6 +34,9 @@ class ConfigSceneViewController: UIViewController {
         
     }
     
+    @IBAction func bigRecAction(_ sender: UISwitch) {
+        gameSceneVC?.bigRec = bigRecToggle.isOn
+    }
     /*
     // MARK: - Navigation
 

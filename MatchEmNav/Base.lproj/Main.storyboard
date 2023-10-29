@@ -125,6 +125,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qw0-6k-ZcD">
                                 <rect key="frame" x="63" y="395" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="bigRecAction:" destination="iug-9r-n6u" eventType="valueChanged" id="6EY-9U-gr2"/>
+                                </connections>
                             </switch>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="5Qw-Rc-QSS">
                                 <rect key="frame" x="63" y="234" width="94" height="32"/>
@@ -141,6 +144,7 @@
                     <navigationItem key="navigationItem" title="Game Options" id="c4S-jR-6GM"/>
                     <connections>
                         <outlet property="SpeedSlider" destination="TN8-A8-7md" id="A7w-H1-bYp"/>
+                        <outlet property="bigRecToggle" destination="qw0-6k-ZcD" id="kFm-ad-cNS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8v2-rY-lGs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
