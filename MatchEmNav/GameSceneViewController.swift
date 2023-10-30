@@ -24,7 +24,7 @@ class GameSceneViewController: UIViewController {
     var newRectTimer: Timer?
     
     var gameRunning = false
-    var gameTime = 12
+    //var gameTime = 10
     //var rectColors: UIColor
     var bigRec = false
     
@@ -39,7 +39,7 @@ class GameSceneViewController: UIViewController {
             self.updateLabel()
         }
     }
-    var timeRemaining = 12 {
+    var timeRemaining = 10 {
         didSet {
             self.updateLabel()
         }
@@ -86,7 +86,7 @@ class GameSceneViewController: UIViewController {
         self.gameOverLabel.text = ""
         self.pauseButton.setTitle("Pause", for: .normal)
         self.matchButton = nil
-        self.timeRemaining = 12
+        self.timeRemaining = 10
         self.score = 0
         self.matchCount = 0
         self.buttonTag = 0
@@ -107,7 +107,7 @@ class GameSceneViewController: UIViewController {
                 self.view.bringSubviewToFront(self.gameOverLabel)
             }
         })
-        self.newRectTimer = Timer.scheduledTimer(withTimeInterval: newRectInterval, repeats: true, block: { Timer in
+        self.newRectTimer = Timer.scheduledTimer(withTimeInterval: self.newRectInterval, repeats: true, block: { Timer in
             if self.gameRunning == true {
                 self.createButton()
                 self.matchCount += 1
