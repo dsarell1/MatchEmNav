@@ -35,7 +35,12 @@ class ConfigSceneViewController: UIViewController {
         var rate = 1.0 / Double(SpeedSlider.value)
         //gameSceneVC?.newRectInterval = Double(SpeedSlider.value)
         gameSceneVC?.newRectInterval = rate
-        
+        self.newRectTimer = Timer.scheduledTimer(withTimeInterval: gameSceneVC?.newRectInterval, repeats: true, block: { Timer in
+            if self.gameRunning == true {
+                self.createButton()
+                self.matchCount += 1
+            }
+        })
     }
     
     @IBAction func bigRecAction(_ sender: UISwitch) {
