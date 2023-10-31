@@ -31,9 +31,11 @@ class ConfigSceneViewController: UIViewController {
     }
     
     @IBAction func SpeedSilderAction(_ sender: UISlider) {
+        self.newRectTimer?.invalidate()
         var rate = 1.0 / Double(SpeedSlider.value)
         //gameSceneVC?.newRectInterval = Double(SpeedSlider.value)
         gameSceneVC?.newRectInterval = rate
+        
     }
     
     @IBAction func bigRecAction(_ sender: UISwitch) {
