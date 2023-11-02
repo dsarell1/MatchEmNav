@@ -149,6 +149,7 @@
                         <outlet property="SpeedSlider" destination="TN8-A8-7md" id="A7w-H1-bYp"/>
                         <outlet property="bigRecToggle" destination="qw0-6k-ZcD" id="kFm-ad-cNS"/>
                         <outlet property="gameTimerStepper" destination="5Qw-Rc-QSS" id="u7a-Hf-Bfc"/>
+                        <outlet property="highScoreTable" destination="X9K-gn-bTk" id="JKt-d1-lCI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8v2-rY-lGs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
