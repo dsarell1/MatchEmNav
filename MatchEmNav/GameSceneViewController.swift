@@ -9,7 +9,6 @@ import UIKit
 
 class GameSceneViewController: UIViewController {
     
-    //@IBOutlet weak var label1: UILabel!
     @IBOutlet weak var scoreTimerLabel: UILabel! // Score and timer Label
     @IBOutlet weak var gameOverLabel: UILabel! // Game Over Label
     @IBOutlet var startButtonOutlet: UIButton! // The Start/retry button
@@ -24,9 +23,16 @@ class GameSceneViewController: UIViewController {
     var newRectTimer: Timer?
     
     var gameRunning = false
-    //var gameTime = 10
-    //var rectColors: UIColor
+    var firstTime = true
+    var startButtonPressed = false
     var bigRec = false
+    var recColorBlackNWhite = false
+    
+    var index = 1
+    
+    var lastScore = 0
+    var highScore = 0
+    var lowScore = 0
     
     var buttonTag = 0
     var matchCount = 0 {
@@ -53,14 +59,28 @@ class GameSceneViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.gameRunning = true
-        self.pauseButton.setTitle("Pause", for: .normal)
+        if (startButtonPressed) {
+            self.gameRunning = true
+            self.pauseButton.setTitle("Pause", for: .normal)
+        }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        if firstTime, let gameDur = UserDefaults.standard.string(forKey: "GameTime"), let bigRectangles = UserDefaults.standard.string(forKey: "BigRec"), let greyScale = UserDefaults.standard.string(forKey: "GreyScale"), let gSpeed = UserDefaults.standard.string(forKey: "GameSpeed"), let hScore = UserDefaults.standard.string(forKey: "HighScore"), let lScore = UserDefaults.standard.string(forKey: "LastScore"), let tinyScore = UserDefaults.standard.string(forKey: "LowScore") {
+            self.firstTime = false
+            self.timeRemaining = Int(gameDur) ?? 10
+            self.bigRec = Bool(bigRectangles) ?? false
+            self.recColorBlackNWhite = Bool(greyScale) ?? false
+            self.newRectInterval = Double(gSpeed) ?? 1
+            self.lastScore = Int(lScore) ?? 0
+            self.highScore = Int(hScore) ?? 0
+            self.lowScore = Int(tinyScore) ?? 0
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //print("red\(#function)", segue.destination)
         let configSceneVC = segue.destination as? ConfigSceneViewController
         configSceneVC?.gameSceneVC = self
-        gameRunning = false
+        self.gameRunning = false
     }
 
     @IBAction func startButton(_ sender: UIButton) {
@@ -69,6 +89,7 @@ class GameSceneViewController: UIViewController {
         sender.removeFromSuperview()
         self.gameRunning = true
         StartGame()
+        self.startButtonPressed = true
     }
     @IBAction func pauseButtonAction(_ sender: UIButton) {
         if self.gameRunning == true {
@@ -82,11 +103,11 @@ class GameSceneViewController: UIViewController {
     }
     func StartGame() {
         // restart all the variables to defaults and remove the rectanges from dictionary and screen
+        //let configSceneVC: ConfigSceneViewController?
         removeRect()
         self.gameOverLabel.text = ""
         self.pauseButton.setTitle("Pause", for: .normal)
         self.matchButton = nil
-        self.timeRemaining = 10
         self.score = 0
         self.matchCount = 0
         self.buttonTag = 0
@@ -105,8 +126,35 @@ class GameSceneViewController: UIViewController {
                 self.view.bringSubviewToFront(self.startButtonOutlet)
                 self.gameOverLabel.text = "Game Over"
                 self.view.bringSubviewToFront(self.gameOverLabel)
+                self.startButtonPressed = false
+                self.timeRemaining = 10
+                
+                if self.score > self.highScore {
+                    self.lowScore = self.lastScore
+                    self.lastScore = self.highScore
+                    self.highScore = self.score
+                    UserDefaults.standard.setValue(self.highScore, forKey: "HighScore")
+                    UserDefaults.standard.setValue(self.lastScore, forKey: "LastScore")
+                    UserDefaults.standard.setValue(self.lowScore, forKey: "LowScore")
+                    print(self.highScore)
+                    print(UserDefaults.standard.integer(forKey: "HighScore"))
+                }
+                else if self.score > self.lastScore {
+                    self.lowScore = self.lastScore
+                    self.lastScore = self.score
+                    UserDefaults.standard.setValue(self.lastScore, forKey: "LastScore")
+                    UserDefaults.standard.setValue(self.lowScore, forKey: "LowScore")
+                }
+                else if self.score > self.lowScore {
+                    self.lowScore = self.score
+                    UserDefaults.standard.setValue(self.lowScore, forKey: "LowScore")
+                }
+                else {
+                    print("tooLow")
+                }
             }
         })
+        self.newRectTimer?.invalidate()
         self.newRectTimer = Timer.scheduledTimer(withTimeInterval: self.newRectInterval, repeats: true, block: { Timer in
             if self.gameRunning == true {
                 self.createButton()
@@ -116,10 +164,8 @@ class GameSceneViewController: UIViewController {
     }
     
     func updateLabel() {
-        if self.gameRunning == true {
-            self.scoreTimerLabel.text = "Created \(self.matchCount) - Time: \(self.timeRemaining) - Score: \(self.score)"
-            self.view.bringSubviewToFront(self.scoreTimerLabel)
-        }
+        self.scoreTimerLabel.text = "Created \(self.matchCount) - Time: \(self.timeRemaining) - Score: \(self.score)"
+        self.view.bringSubviewToFront(self.scoreTimerLabel)
     }
     
     func createButton() { // Creates 2 Rectangles with the same size and color but in random locations.
@@ -201,6 +247,11 @@ class GameSceneViewController: UIViewController {
         return CGPoint(x: x, y: y)
     }
     func randColor() -> UIColor {
-        return UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1.0)
+        if !recColorBlackNWhite {
+            return UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1.0)
+        }
+        else {
+            return UIColor(red: 0, green: 0, blue: 0, alpha: CGFloat.random(in: 0.1...1))
+        }
     }
 }
