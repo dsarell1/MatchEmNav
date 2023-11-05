@@ -66,7 +66,6 @@ class ConfigSceneViewController: UIViewController, UITableViewDelegate, UITableV
         
         let cell = highScoreTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableCell
         
-        //cell.scoreLabel.text = String(UserDefaults.standard.integer(forKey: "HighScore"))
         let newGameManager = [UserDefaults.standard.integer(forKey: "HighScore"), UserDefaults.standard.integer(forKey: "LastScore"), UserDefaults.standard.integer(forKey: "LowScore")]
         
         cell.scoreLabel.text = "Score: " + String(newGameManager[indexPath.row])

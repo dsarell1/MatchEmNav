@@ -22,16 +22,17 @@ class GameSceneViewController: UIViewController {
     var gameTimer: Timer?
     var newRectTimer: Timer?
     
-    var gameRunning = false
-    var firstTime = true
-    var startButtonPressed = false
-    var bigRec = false
-    var recColorBlackNWhite = false
+    var gameRunning = false // checks if game is running or not
+    var firstTime = true // checks if this is the first time loading the game. (user Defaults)
+    var startButtonPressed = false // checks if start button is pressed
+    var bigRec = false // checks if big rectangle mode is on
+    var recColorBlackNWhite = false // checks if grey scale mode is on
     
     var index = 1
     
-    var lastScore = 0
+    // the scores of the tableview
     var highScore = 0
+    var lastScore = 0
     var lowScore = 0
     
     var buttonTag = 0
@@ -127,8 +128,19 @@ class GameSceneViewController: UIViewController {
                 self.gameOverLabel.text = "Game Over"
                 self.view.bringSubviewToFront(self.gameOverLabel)
                 self.startButtonPressed = false
-                self.timeRemaining = 10
                 
+                let gameDur1 = UserDefaults.standard.integer(forKey: "GameTime")
+                if gameDur1 != nil {
+                    self.timeRemaining = gameDur1 // After Game is done the game time is resetted back to 10 Seconds
+                }
+                else {
+                    self.timeRemaining = 10
+                }
+                
+                // The top 3 User Scores. Stored in User Defaults. score is the current score for that game
+                // highScore
+                // lastScore
+                // lowScore
                 if self.score > self.highScore {
                     self.lowScore = self.lastScore
                     self.lastScore = self.highScore
