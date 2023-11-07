@@ -14,6 +14,8 @@ class GameSceneViewController: UIViewController {
     @IBOutlet var startButtonOutlet: UIButton! // The Start/retry button
     @IBOutlet weak var pauseButton: UIButton! // Pause/Resume Game Button
     
+    @IBOutlet weak var scoreCommentLabel: UILabel!
+    
     var matchRect: [UIButton: Int] = [:] // Dictionary for Matching
     var matchButton: UIButton?
     
@@ -107,6 +109,7 @@ class GameSceneViewController: UIViewController {
         //let configSceneVC: ConfigSceneViewController?
         removeRect()
         self.gameOverLabel.text = ""
+        self.scoreCommentLabel.text = ""
         self.pauseButton.setTitle("Pause", for: .normal)
         self.matchButton = nil
         self.score = 0
@@ -142,6 +145,7 @@ class GameSceneViewController: UIViewController {
                 // lastScore
                 // lowScore
                 if self.score > self.highScore {
+                    self.scoreCommentLabel.text = "New High Score!"
                     self.lowScore = self.lastScore
                     self.lastScore = self.highScore
                     self.highScore = self.score
@@ -152,18 +156,22 @@ class GameSceneViewController: UIViewController {
                     print(UserDefaults.standard.integer(forKey: "HighScore"))
                 }
                 else if self.score > self.lastScore {
+                    self.scoreCommentLabel.text = "It is not Bad Score!"
                     self.lowScore = self.lastScore
                     self.lastScore = self.score
                     UserDefaults.standard.setValue(self.lastScore, forKey: "LastScore")
                     UserDefaults.standard.setValue(self.lowScore, forKey: "LowScore")
                 }
                 else if self.score > self.lowScore {
+                    self.scoreCommentLabel.text = "Eeh Could be Better."
                     self.lowScore = self.score
                     UserDefaults.standard.setValue(self.lowScore, forKey: "LowScore")
                 }
                 else {
+                    self.scoreCommentLabel.text = "My Grandma Could Do Better Than You!!"
                     print("tooLow")
                 }
+                self.view.bringSubviewToFront(self.scoreCommentLabel)
             }
         })
         self.newRectTimer?.invalidate()
@@ -217,7 +225,11 @@ class GameSceneViewController: UIViewController {
                     sender.setTitle("👍", for: .normal)
                     a.removeFromSuperview()
                     sender.removeFromSuperview()
-                    self.score += 1
+                    if self.recColorBlackNWhite {
+                        self.score += 2
+                    } else {
+                        self.score += 1
+                    }
                     self.matchButton = nil
                 } else {
                     print("not a Match!")
