@@ -133,7 +133,7 @@ class GameSceneViewController: UIViewController {
                 self.startButtonPressed = false
                 
                 let gameDur1 = UserDefaults.standard.integer(forKey: "GameTime")
-                if gameDur1 != nil {
+                if gameDur1 != 0 {
                     self.timeRemaining = gameDur1 // After Game is done the game time is resetted back to 10 Seconds
                 }
                 else {
