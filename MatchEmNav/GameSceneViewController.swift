@@ -79,6 +79,9 @@ class GameSceneViewController: UIViewController {
             self.lowScore = Int(tinyScore) ?? 0
         }
     }
+    overide func viewDidDissappear(_ animated: Bool) {
+        self.firstTime = true
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let configSceneVC = segue.destination as? ConfigSceneViewController
