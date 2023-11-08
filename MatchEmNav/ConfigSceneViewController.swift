@@ -31,9 +31,6 @@ class ConfigSceneViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.SpeedSlider.value = 1
-        //self.gameTimerStepper.value = 10
-        //self.bigRecToggle.isOn = false
         self.highScoreTable.delegate = self
         self.highScoreTable.dataSource = self
         self.highScoreTable.rowHeight = 50

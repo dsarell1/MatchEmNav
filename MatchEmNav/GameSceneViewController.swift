@@ -25,7 +25,6 @@ class GameSceneViewController: UIViewController {
     var newRectTimer: Timer?
     
     var gameRunning = false // checks if game is running or not
-    var firstTime = true // checks if this is the first time loading the game. (user Defaults)
     var startButtonPressed = false // checks if start button is pressed
     var bigRec = false // checks if big rectangle mode is on
     var recColorBlackNWhite = false // checks if grey scale mode is on
@@ -89,20 +88,8 @@ class GameSceneViewController: UIViewController {
         if let tinyScore = UserDefaults.standard.string(forKey: "LowScore") {
             self.lowScore = Int(tinyScore) ?? 0
         }
-        print ("In View Did Appear")
-        //self.firstTime = false
-//            self.timeRemaining = Int(gameDur) ?? 10
-//            self.bigRec = Bool(bigRectangles) ?? false
-//            self.recColorBlackNWhite = Bool(color) ?? false
-//            self.newRectInterval = Double(gSpeed) ?? 1
-//            self.lastScore = Int(lScore) ?? 0
-//            self.highScore = Int(hScore) ?? 0
-//            self.lowScore = Int(tinyScore) ?? 0
     }
-    /*
-    override func viewDidDisappear(_ animated: Bool) {
-        self.firstTime = true
-    }*/
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let configSceneVC = segue.destination as? ConfigSceneViewController
@@ -130,7 +117,6 @@ class GameSceneViewController: UIViewController {
     }
     func StartGame() {
         // restart all the variables to defaults and remove the rectanges from dictionary and screen
-        //let configSceneVC: ConfigSceneViewController?
         removeRect()
         self.gameOverLabel.text = ""
         self.scoreCommentLabel.text = ""
@@ -158,7 +144,7 @@ class GameSceneViewController: UIViewController {
                 
                 let gameDur1 = UserDefaults.standard.integer(forKey: "GameTime")
                 if gameDur1 != 0 {
-                    self.timeRemaining = gameDur1 // After Game is done the game time is resetted back to 10 Seconds
+                    self.timeRemaining = gameDur1
                 }
                 else {
                     self.timeRemaining = 10
