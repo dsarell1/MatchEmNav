@@ -25,7 +25,7 @@ class GameSceneViewController: UIViewController {
     var newRectTimer: Timer?
     
     var gameRunning = false // checks if game is running or not
-    //var firstTime = true // checks if this is the first time loading the game. (user Defaults)
+    var firstTime = true // checks if this is the first time loading the game. (user Defaults)
     var startButtonPressed = false // checks if start button is pressed
     var bigRec = false // checks if big rectangle mode is on
     var recColorBlackNWhite = false // checks if grey scale mode is on
@@ -68,16 +68,36 @@ class GameSceneViewController: UIViewController {
         }
     }
     override func viewDidAppear(_ animated: Bool) {
-        if let gameDur = UserDefaults.standard.string(forKey: "GameTime"), let bigRectangles = UserDefaults.standard.string(forKey: "BigRec"), let greyScale = UserDefaults.standard.string(forKey: "GreyScale"), let gSpeed = UserDefaults.standard.string(forKey: "GameSpeed"), let hScore = UserDefaults.standard.string(forKey: "HighScore"), let lScore = UserDefaults.standard.string(forKey: "LastScore"), let tinyScore = UserDefaults.standard.string(forKey: "LowScore") {
-            //self.firstTime = false
+        if let gameDur = UserDefaults.standard.string(forKey: "GameTime") {
             self.timeRemaining = Int(gameDur) ?? 10
+        }
+        if let bigRectangles = UserDefaults.standard.string(forKey: "BigRec") {
             self.bigRec = Bool(bigRectangles) ?? false
-            self.recColorBlackNWhite = Bool(greyScale) ?? false
+        }
+        if let gSpeed = UserDefaults.standard.string(forKey: "GameSpeed") {
             self.newRectInterval = Double(gSpeed) ?? 1
-            self.lastScore = Int(lScore) ?? 0
+        }
+        if let color = UserDefaults.standard.string(forKey: "GreyScale") {
+            self.recColorBlackNWhite = Bool(color) ?? false
+        }
+        if let hScore = UserDefaults.standard.string(forKey: "HighScore") {
             self.highScore = Int(hScore) ?? 0
+        }
+        if let lScore = UserDefaults.standard.string(forKey: "LastScore") {
+            self.lastScore = Int(lScore) ?? 0
+        }
+        if let tinyScore = UserDefaults.standard.string(forKey: "LowScore") {
             self.lowScore = Int(tinyScore) ?? 0
         }
+        print ("In View Did Appear")
+        //self.firstTime = false
+//            self.timeRemaining = Int(gameDur) ?? 10
+//            self.bigRec = Bool(bigRectangles) ?? false
+//            self.recColorBlackNWhite = Bool(color) ?? false
+//            self.newRectInterval = Double(gSpeed) ?? 1
+//            self.lastScore = Int(lScore) ?? 0
+//            self.highScore = Int(hScore) ?? 0
+//            self.lowScore = Int(tinyScore) ?? 0
     }
     /*
     override func viewDidDisappear(_ animated: Bool) {
